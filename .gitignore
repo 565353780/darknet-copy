@@ -13,7 +13,9 @@ darknet53.conv.74
 *.png
 *.jpg
 *.pyc
+.fuse*
 
+# folder
 old/
 mnist/
 data/
@@ -25,8 +27,6 @@ convnet/
 decaf/
 submission/
 cfg/
-
-.fuse*
 
 # OS Generated #
 .DS_Store*
