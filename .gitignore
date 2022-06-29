@@ -17,6 +17,8 @@ darknet53.conv.74
 .fuse*
 
 # folder
+backup
+obj
 old/
 mnist/
 data/
