@@ -53,16 +53,19 @@ class DarknetDetector(object):
             print("[ERROR][DarknetDetector::loadModel]")
             print("\t model file not exist!")
             return False
-        self.meta = self.load_meta(meta_path)
-        self.model = self.load_net(config_path, model_path, 0)
+
+        meta_path_bytes = bytes(meta_path, encoding='utf-8')
+        config_path_bytes = bytes(config_path, encoding='utf-8')
+        model_path_bytes = bytes(model_path, encoding='utf-8')
+        self.meta = self.load_meta(meta_path_bytes)
+        self.model = self.load_net(config_path_bytes, model_path_bytes, 0)
         return True
 
     def detect(self, image, thresh=.5, hier_thresh=.5, nms=.45):
-        im = self.load_image(image, 0, 0)
         num = c_int(0)
         pnum = pointer(num)
-        self.predict_image(self.model, im)
-        dets = self.get_network_boxes(self.model, im.w, im.h, thresh, hier_thresh, None, 0, pnum)
+        self.predict_image(self.model, image)
+        dets = self.get_network_boxes(self.model, image.w, image.h, thresh, hier_thresh, None, 0, pnum)
         num = pnum[0]
         if (nms): self.do_nms_obj(dets, num, self.meta.classes, nms);
 
@@ -73,13 +76,18 @@ class DarknetDetector(object):
                     b = dets[j].bbox
                     res.append((self.meta.names[i], dets[j].prob[i], (b.x, b.y, b.w, b.h)))
         res = sorted(res, key=lambda x: -x[1])
-        self.free_image(im)
+        self.free_image(image)
         self.free_detections(dets, num)
         return res
 
+    def detectFile(self, image_path, thresh=.5, hier_thresh=.5, nms=.45):
+        image_path_bytes = bytes(image_path, encoding='utf-8')
+        image = self.load_image(image_path_bytes, 0, 0)
+        return self.detect(image, thresh, hier_thresh, nms)
+
 def demo():
     dll_folder_path = "/home/chli/github/darknet-copy/"
-    meta_path = "./Config/railway/voc.data"
+    meta_path = "/home/chli/github/darknet-copy/Config/railway/voc.data"
     config_path = "./Config/railway/yolov3.cfg"
     model_path = "./Config/railway/yolov3_train_2c_detect_2class.backup"
     image_path = "/home/chli/chLi/Download/DeepLearning/Dataset/RailwayStation/2C_mask/train_dataset/0.jpg"
@@ -87,7 +95,7 @@ def demo():
     darknet_detector = DarknetDetector()
     darknet_detector.loadDLL(dll_folder_path)
     darknet_detector.loadModel(meta_path, config_path, model_path)
-    r = darknet_detector.detect(image_path)
+    r = darknet_detector.detectFile(image_path)
     print(r)
     #print r[:10]
     return True
