@@ -1,6 +1,7 @@
 # compiled
 *.o
 *.a
+*.so
 darknet
 
 # model
