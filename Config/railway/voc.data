@@ -1,0 +1,6 @@
+classes= 2
+train  = /home/chli/railway/train.txt
+valid  = /home/chli/railway/test.txt
+names = Config/railway/coco.names
+backup = backup
+
