@@ -13,13 +13,20 @@ make -j
 ```
 
 ## Train
+
 ```bash
 ./train.sh
 ```
 
-## Run
+## Test
+
 ```bash
 ./test.sh
+```
+
+## Run
+```bash
+python demo.py
 ```
 
 ## Enjoy it~
