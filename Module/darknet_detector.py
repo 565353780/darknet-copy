@@ -95,9 +95,9 @@ def demo():
     darknet_detector = DarknetDetector()
     darknet_detector.loadDLL(dll_folder_path)
     darknet_detector.loadModel(meta_path, config_path, model_path)
-    r = darknet_detector.detectFile(image_path)
-    print(r)
-    #print r[:10]
+    result = darknet_detector.detectFile(image_path)
+
+    print(result)
     return True
 
 if __name__ == "__main__":
