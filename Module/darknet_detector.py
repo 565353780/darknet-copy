@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 from ctypes import *
 import math
 import random
@@ -41,8 +44,6 @@ class IMAGE(Structure):
 class METADATA(Structure):
     _fields_ = [("classes", c_int),
                 ("names", POINTER(c_char_p))]
-
-    
 
 #lib = CDLL("/home/pjreddie/documents/darknet/libdarknet.so", RTLD_GLOBAL)
 lib = CDLL("libdarknet.so", RTLD_GLOBAL)
@@ -152,4 +153,15 @@ if __name__ == "__main__":
     meta = load_meta("cfg/coco.data")
     r = detect(net, meta, "data/dog.jpg")
     print(r)
+
+class DarknetDetector(object):
+    def __init__(self):
+        return
+
+def demo():
+    darknet_detector = DarknetDetector()
+    return True
+
+if __name__ == "__main__":
+    demo()
 
