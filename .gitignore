@@ -6,6 +6,8 @@ darknet
 
 # model
 darknet53.conv.74
+*.weights
+*.backup
 
 # output
 *.dSYM
