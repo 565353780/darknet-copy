@@ -1,0 +1,34 @@
+# compiled
+*.o
+*.a
+darknet
+
+# output
+*.dSYM
+*.csv
+*.out
+*.png
+*.jpg
+*.pyc
+
+old/
+mnist/
+data/
+caffe/
+grasp/
+images/
+opencv/
+convnet/
+decaf/
+submission/
+cfg/
+
+.fuse*
+
+# OS Generated #
+.DS_Store*
+ehthumbs.db
+Icon?
+Thumbs.db
+*.swp
+
