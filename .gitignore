@@ -3,6 +3,9 @@
 *.a
 darknet
 
+# model
+darknet53.conv.74
+
 # output
 *.dSYM
 *.csv
